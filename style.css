@@ -1,0 +1,11 @@
+@import url('https://necsup.com/style.css');
+
+:root {
+    --primary_color: #f8f853;
+}
+
+body { padding-block: 35px; }
+
+
+@media (max-width: 767px) {
+}
