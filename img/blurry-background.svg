@@ -1,0 +1,8 @@
+<svg id="visual" viewBox="0 0 1920 3000" width="1920" height="3000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<rect width="1920" height="3000" fill="#1b1b1b"></rect>
+<g filter="url(#blur1)">
+    <circle cx="607" cy="2883" fill="#1f1f0f" r="1175"/>
+    <circle cx="1526" cy="2776" fill="#1b1b1b" r="1175"/>
+    <circle cx="989" cy="2146" fill="#1f1f0f" r="1175"/><circle cx="1814" cy="83" fill="#1f1f0f" r="1175"/>
+    <circle cx="1557" cy="1229" fill="#1b1b1b" r="1175"/><circle cx="283" cy="1623" fill="#1f1f0f" r="1175"/>
+</g></svg>
