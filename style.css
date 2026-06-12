@@ -1,64 +1,204 @@
-@import url('https://necsup.com/style.css');
+/* @import url('https://necsup.com/style.css'); */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
 
-:root {
-    --primary_color: #f8f853;
-}
 
-body {
-    padding: 35px;
-    background: url(./img/blurry-background.svg);
-}
-body::before {
-    content: "";
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    backdrop-filter: blur(99px);
-}
+html * {
+    font-family: "Google Sans Flex", sans-serif;
+    margin: 0;
+    padding: 0;
+    border-radius: var(--default_border_radius);
+    transition: 200ms;
 
-#workouts {
-    .btn1 {
-        width: calc(100% - 60px);
-        text-align: center;
-        margin-bottom: 30px;
+    --primary_color: #ff0;
+    --toned_primary_color: rgb(255, 255, 150);
+    --background_clr: #f1f1f1;
+    --background_accent_clr: #ddd;
+    --box_title_clr: #1B1B1B;
+    --paragraph_clr: #444;
+
+    --default_border_radius: 12px;
+
+    h1 { font-size: 32px; color: var(--box_title_clr); }
+    h2 { font-size: 28px; color: var(--box_title_clr); }
+    h3 { font-size: 24px; color: var(--box_title_clr); }
+    h4 { font-size: 20px; color: var(--box_title_clr); }
+    h5 { font-size: 18px; color: var(--box_title_clr); }
+    p { font-size: 16px; color: var(--paragraph_clr); }
+
+    a { text-decoration: none; color: initial; }
+
+    .svg-inline--fa {
+        width: initial;
+        aspect-ratio: 1;
     }
-    .workouts {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+
+    .scrolling_singleRow_grid::-webkit-scrollbar { display: none; }  /* Chrome */
+    .scrolling_singleRow_grid {
+        display: flex;
         row-gap: 20px;
         column-gap: 20px;
 
-        .workout {
-            width: calc(100% - 36px);
-            padding: 12px 18px;
+        overflow-x: scroll;
+        -ms-overflow-style: none;  /* MS Edge */
+        scrollbar-width: none;  /* Firefox */
 
-            background: #0001;
-            border-radius: 12px;
-            border: solid 1px #0005;
+        .new_workout {
+            min-width: 250px;
+            max-width: 250px;
+        }
+    }
+}
+html.dark-mode * {
+    --primary_color: #f8f853;
+    --background_clr: #1B1B1B;
+    --background_accent_clr: #1A1A0B;
+    --box_title_clr: #f1f1f1;
+}
 
-            h3 {
-                width: fit-content;
-                padding-bottom: 8px;
-                padding-right: 32px;
-                margin-bottom: 8px;
+body:has(nav.topNav) { padding-top: 70px; }
+body {
+    overflow: hidden;
+    min-height: calc(100vh - 40px);
+
+    padding: 20px;
+    background: var(--background_clr);
+    /* background: linear-gradient(
+        20deg,
+        var(--background_clr) 0%,
+        var(--background_accent_clr) 30%,
+        var(--background_clr) 100%
+    ); */
+}
+
+nav.topNav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: +100;
+    padding-inline: 15px;
+    border-radius: 0;
+
+    display: flex;
+    background: var(--background_accent_clr);
+    border-bottom: solid 1px color-mix(in oklab, var(--box_title_clr) 10%, transparent);
+
+    button {
+        position: relative;
+        background: transparent;
+        border: none;
+        padding: 25px 10px 8px;
+
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    button::after {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: calc(100% - 30px);
+        height: 2px;
+        background: var(--primary_color);
+    }
+}
+
+#workouts {
+    background: var(--background_accent_clr);
+
+    .topNav_tabs_container {
+        display: grid;
+        grid-template-columns: 1fr;
+        
+        .topNav_tab {
+            grid-area: 1 / 1;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(35px);
+        }
+
+        .topNav_tab.topNav_tab_active {
+            pointer-events: all;
+            opacity: 1;
+            transform: translateY(0px);
+            transition-delay: 100ms;
+        }
+    }
+    .topNav_tab {
+        h3 { margin: 35px 0 16px; }
+        h3:first-child { margin-top: 0; }
+
+        .create_empty_btn {
+            width: calc(100% - 40px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            background: var(--box_title_clr);
+
+            .svg-inline--fa { height: 26px; }
+            .svg-inline--fa path { fill: var(--background_clr); }
+
+            h4 { color: var(--background_clr); margin-bottom: 6px; }
+            p { color: var(--background_accent_clr); }
+        }
+        .create_empty_btn:hover { background: color-mix(in oklab, var(--box_title_clr) 90%, transparent); }
+
+        .new_workout_grid, .workout_historyOrPlans_grid {
+            .iconContainer {
+                width: 100%;
+                aspect-ratio: 1;
+                background: var(--toned_primary_color);
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .svg-inline--fa { height: 35%; }
+                .svg-inline--fa path { fill: var(--paragraph_clr); }
+            }
+
+            .exerciseList {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                min-height: 40px;
+                border-radius: 0;
+            }
+        }
+
+        .new_workout_grid {
+            .new_workout {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .workout_historyOrPlans_grid {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 20px;
+            column-gap: 35px;
+
+            width: calc(100vw - 40px);
+
+            .flexBox_item {
+                min-width: 290px;
+                width: calc(50% - 20px);
 
                 display: flex;
                 align-items: center;
-                gap: 12px;
+                gap: 20px;
 
-                font-size: 26px;
-                border-bottom: solid 1px #0003;
-
-                img {
-                    height: 36px;
-                    max-width: 80px;
-                }
-            }
-
-            .firstSet {
-                opacity: .7;
+                .iconContainer { min-width: 80px; max-width: 80px; }
             }
         }
     }
